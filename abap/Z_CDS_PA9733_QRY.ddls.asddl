@@ -1,0 +1,33 @@
+@AbapCatalog.sqlViewName: 'ZVPA9733QRY'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'PA9733 Payment Query'
+@VDM.viewType: #CONSUMPTION
+@Analytics.query: true
+@OData.publish: true
+
+define view Z_CDS_PA9733_QRY
+  as select from Z_CDS_PA9733_CUBE
+{
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem:      [{ position: 10 }]
+  key BankArea,
+
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem:      [{ position: 20 }]
+  key ControlKey,
+
+  @UI.selectionField: [{ position: 30 }]
+  @UI.lineItem:      [{ position: 30 }]
+  key PaymentDate,
+
+  @UI.selectionField: [{ position: 40 }]
+  @UI.lineItem:      [{ position: 40 }]
+  key payment_status as PaymentStatus,
+
+  @UI.lineItem:           [{ position: 50 }]
+  @DefaultAggregation: #SUM
+  TotalAmount,
+
+  @UI.lineItem: [{ position: 60 }]
+  Currency
+}
